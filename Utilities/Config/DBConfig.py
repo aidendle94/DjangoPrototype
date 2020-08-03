@@ -12,3 +12,7 @@ class DbConfig:
         )
     def get(self):
         return self.mydb
+
+test = DbConfig()
+
+print(test.mydb)
