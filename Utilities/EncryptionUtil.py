@@ -1,23 +1,19 @@
 import bcrypt
 
 
-class EncryptionUtil():
+class EncryptionUtil:
 
-    def __init__(self, password):
-        self.password = bytes(password, 'utf-8')
-        self.salted = None
+    def __init__(self):
+        pass
+    def EncryptPassword(self,inputpass):
+        salted = bcrypt.hashpw(bytes(inputpass,'utf-8'), bcrypt.gensalt())
+        print(salted)
+        return salted
 
-    def EncryptPassword(self):
-        self.salted = bcrypt.hashpw(self.password, bcrypt.gensalt())
-        return self.salted
-
-    def ValidatePassword(self, hash):
-        hash = bytes(hash, 'utf-8')
-
-        if bcrypt.checkpw(hash, self.salted):
-            return "Sccess"
+    def ValidatePassword(self, hash,password):
+        password = bytes(password,'utf-8')
+        if bcrypt.checkpw(password,hash):
+            return True
         else:
-            return "fail"
-test = EncryptionUtil('password')
-test.EncryptPassword()
-print(type(test.salted))
+            return False
+
